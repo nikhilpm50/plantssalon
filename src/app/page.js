@@ -127,7 +127,7 @@ export default function PlantsSalonWebsite() {
             ))}
           </div>
 
-          <div className="bg-white p-8 rounded-lg shadow-lg">
+          <div className="bg-white p-8 rounded-lg shadow-lg sm:block hidden">
             <p className="font-cursive text-green-800 text-lg leading-relaxed mt-4">
               At the heart of every service we offer lies a commitment to
               providing you with not just a treatment, but an experience that
@@ -225,7 +225,7 @@ export default function PlantsSalonWebsite() {
                 style={{ overflow: "hidden" }}
               ></iframe>
             </div>
-            <div className="rounded-lg overflow-hidden shadow-lg h-full pb-20">
+            <div className="rounded-lg overflow-hidden shadow-lg h-full pb-20 sm:block hidden">
               <iframe
                 className="w-full h-full"
                 src="https://www.instagram.com/reel/DEZFwE4T6H2/embed/"
@@ -235,7 +235,7 @@ export default function PlantsSalonWebsite() {
                 style={{ overflow: "hidden" }}
               ></iframe>
             </div>
-            <div className="rounded-lg overflow-hidden shadow-lg h-full pb-20">
+            <div className="rounded-lg overflow-hidden shadow-lg h-full pb-20 sm:block hidden">
               <iframe
                 className="w-full h-full"
                 src="https://www.instagram.com/reel/DESbq8Pz2KK/embed/"
@@ -251,16 +251,16 @@ export default function PlantsSalonWebsite() {
 
       <TestimonialsSection />
 
-      <section className="py-16 h-screen relative">
+      <section className="py-16 h-auto relative">
         <div
           className="absolute inset-0 bg-cover bg-center backdrop-blur-md"
           style={{
             backgroundImage: "url(/contact-bg.jpg)",
-            filter: "blur(2px)", // Adjust blur intensity
+            filter: "blur(2px)",
           }}
         ></div>
-        <div className="container mx-auto h-full flex items-center justify-between relative z-10">
-          <div className="w-1/2 pr-16 p-8 rounded-lg">
+        <div className="container mx-auto h-full flex flex-col sm:flex-row items-center justify-between relative z-10">
+          <div className="w-full sm:w-1/2 px-4 py-8 text-center sm:text-left">
             <p className="text-lg text-green-700 font-bold italic">
               We’d love to hear from you! If you have any questions, feedback,
               or just want to say hi, don’t hesitate to reach out.
@@ -268,7 +268,7 @@ export default function PlantsSalonWebsite() {
           </div>
 
           <motion.div
-            className="w-1/2 bg-white p-8 rounded-lg shadow-lg"
+            className="w-full sm:w-1/2 bg-white p-8 rounded-lg shadow-lg"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -276,7 +276,7 @@ export default function PlantsSalonWebsite() {
             transition={{ duration: 1 }}
           >
             <form>
-              <h2 className="text-4xl font-bold text-green-800 mb-8">
+              <h2 className="text-3xl sm:text-4xl font-bold text-green-800 mb-8">
                 Contact Us
               </h2>
               <input
