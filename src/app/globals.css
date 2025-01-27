@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* In globals.css or your main stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

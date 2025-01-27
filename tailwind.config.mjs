@@ -11,6 +11,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        cursive: ['"Brush Script"', '"Dancing Script"', 'cursive'], // System cursive fonts
+      },
     },
   },
   plugins: [],
