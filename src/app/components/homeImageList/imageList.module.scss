@@ -1,0 +1,87 @@
+@import "../../../../public/styles/variable";
+@import "../../../../public/styles/base";
+@import "../../../../public/styles/mixins/mixins";
+
+.image_list{
+    position: relative;
+    overflow: hidden;
+    :global{
+        .pin-wrapper{
+            position: relative;
+        }
+    }
+}
+.panel_img{
+    width: 100%;
+    height: 100%;
+    // padding: 100px 0;
+    position: relative;
+    &::after{
+        @include max(767) {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0,.4);
+            position: absolute;
+            top: 0;
+            left: 0;
+        } 
+    }
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        // @include max(1600) {
+        //     height: auto;
+        // }
+    }
+}
+
+.stacking_card{
+    width: 100%;
+}
+.stacking_cards{
+    position: relative;
+    background-image: linear-gradient(to bottom, #eeece8, #f4f0ee, #f8f5f5, #fbfafb, #ffffff);
+}
+// .inner_cards{
+//     padding: 50px 0;
+//     @include max(767) {
+//         padding: 0;
+//     }
+// }
+.counter{
+    position: absolute;
+    left: 110px;
+    top: 90px;
+    z-index: 9;
+    @include max(1060) {
+        left: 60px;
+        top: 30px;
+    }
+    @include max(767) {
+        left: 15px;
+        top: 20px;
+    }
+    h5{
+        font-size: 5.625rem;
+        color: #fff;
+        @include max(1600) {
+            font-size: 5rem; 
+        }
+        @include max(1060) {
+            font-size: 4rem; 
+        }
+        @include max(767) {
+            font-size:3rem; 
+        }
+        span{
+            font-size: 2.5rem;
+            color: #fff;
+            @include max(767) {
+                 font-size: 2rem;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,443 @@
+@import "../../../../public/styles/variable";
+@import "../../../../public/styles/base";
+@import "../../../../public/styles/mixins/mixins";
+
+.bench_card {
+    transition: all 1s ease-in-out;
+    display: block;
+
+    .image {
+        // position: relative;
+        overflow: hidden;
+        border-radius: 6px;
+        >div{
+            @include max(1060) {
+                height: 550px !important;
+            }
+            @include max(992) {
+                height:410px !important;
+            }
+        }
+        @include max(767) {
+            height: 400px;
+
+            >div {
+                height: 400px !important;
+            }
+
+        }
+
+        &::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            border-radius: 6px;
+            background: linear-gradient(180deg,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 0, 0, 0.4) 100%);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        img {
+            border-radius: 6px;
+            display: block;
+            @include max(1060) {
+                height: 450px !important;
+            }
+        }
+    }
+
+    .benchmark_media {
+        position: relative;
+
+        .arw_btn {
+            position: absolute;
+            right: 40px;
+            bottom: 40px;
+            transition: all 1s ease-in-out;
+
+            @include max(1450) {
+                right: 30px;
+                bottom: 30px;
+            }
+        }
+    }
+
+    .bench_card_details {
+        padding-top: 25px;
+
+        @include max(1450) {
+            padding-top: 20px;
+        }
+
+        @include max(767) {
+            padding-top: 15px;
+        }
+
+        h3 {
+            font-size: size(30px);
+            line-height: size(40px);    
+            @include max(1600) {
+                font-size: size(27px);
+                line-height: size(32px);    
+            }
+            @include max(1060) {
+                font-size: size(22px);
+                line-height: size(28px);    
+            }
+        }
+        
+
+        h4 {
+            font-size: 1.125rem;
+            font-family: var(--primary-font);
+
+            @include max(1450) {
+                font-size: 1.05rem;
+            }
+            @include max(1060) {
+                font-size: .9rem;
+            }
+        }
+    }
+
+    .bech_detail_top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @include max(767) {
+            flex-wrap: wrap;
+        }
+
+        h3 {
+            @include max(767) {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    p {
+        margin-top: 10px;
+        color: rgba(8, 8, 8, .5);
+        @include max(1600) {
+            font-size: .9rem;
+            margin-top: 8px;
+        }
+        @include max(767) {
+            margin-top: 10px;
+        }
+    }
+
+    &:hover {
+        background-color: #EEECE8;
+        padding: 25px;
+        border-radius: 6px;
+
+        .arw_btn {
+            transform: rotate(37deg)
+        }
+    }
+
+    .video {
+        border-radius: 6px;
+        overflow: hidden;
+        >div{
+            @include max(1060) {
+                height: 450px !important;
+            }
+            @include max(992) {
+                height:410px !important;
+            }
+        }
+        video {
+            object-fit: cover;
+            height: 640px !important;
+            width: 100%;
+            border-radius: 6px;
+            @include max(1600) {
+                transform: scale(1.3);
+            }
+            @include max(1060) {
+                height: 450px !important
+            }
+        }
+    }
+}
+
+
+.finest_card {
+    display: flex;
+    column-gap: 42px;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+    position: absolute;
+  
+    // background: #fff;
+    .finest_big_img {
+      // width: 30%;
+      width: 100%;
+      max-width: 579px;
+      position: relative;
+      @include max(1600) {
+        max-width: 480px;
+      }
+      @include max(1366) {
+        max-width: 440px;
+      }
+      @include max(1250) {
+        max-width: 400px;
+      }
+      figure {
+        @include aspectRatio(579, 737);
+      }
+  
+      img {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+      }
+    }
+  
+    .finest_contents {
+      width: 100%;
+      max-width: 630px;
+      background: #fff;
+    }
+  
+    .finest_small_img {
+      // width: 20%;
+      margin-block: auto;
+      width: 100%;
+      max-width: 273px;
+      margin-right: 70px;
+      @include max(1600) {
+        max-width: 248px;
+      }
+      @include max(1250) {
+        max-width: 220px;
+      }
+      @include max(992) {
+        display: none
+      }
+      figure {
+        @include aspectRatio(273, 348);
+        
+      }
+  
+      img {
+        border-radius: 6px;
+      }
+    }
+  
+    h2 {
+      font-size: size(30px);
+      margin-bottom: 20px;
+      transition: all 0.3s ease-in-out;
+      color: rgba(8, 8, 8, 0.4);
+      @include max(1600) {
+        font-size: size(26px);
+      }
+      @include max(1250) {
+        font-size: size(22px);
+      }
+    }
+  
+    p {
+      color: rgba(8, 8, 8, 0.5);
+      line-height: size(25px);
+    }
+  
+    &.active {
+      h2 {
+        color: #080808;
+      }
+    }
+  
+    //amal styles
+    .finest_big_img {
+      position: relative;
+      figure {
+        &:not(:first-of-type) {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          clip-path: inset(100% 0% 0% 0%);
+          z-index: 0;
+        }
+      }
+    }
+    .finest_small_img {
+      position: relative;
+      figure {
+        &:not(:first-of-type) {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          clip-path: inset(100% 0% 0% 0%);
+        }
+      }
+    }
+  
+    .finest_contents {
+      position: relative;
+  
+      .contents {
+        &:not(:first-of-type) {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          background-color: #fff;
+        }
+      }
+    }
+  
+    
+  }
+
+.expertise_card {
+    width: 100%;
+    width: 370px;
+    position: relative;
+    display: block;
+    border-radius: 6px;
+    overflow: hidden;
+
+    @include min(1700) {
+        width: 450px;
+        height: 524px;
+    }
+    @include max(1600) {
+        width: 330px;
+        height: 380px;
+    }
+    @include max(1250) {
+        width: 280px;
+        height: 340px;
+    }
+    @include max(992) {
+        width: 350px;
+        height: 375px;
+    }
+    @include max(767) {
+        width: 270px;
+        height: 270px;  
+        margin-top: 20px;
+    }
+    .img {
+        // @include aspectRatio(370,430);
+        position: relative;
+        width: 100%;
+
+        &::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg,
+                    rgba(0, 0, 0, 0.7) 0%,
+                    rgba(0, 0, 0, 0) 100%);
+            border-radius: 6px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+    
+    img {
+        border-radius: 6px;
+        width: 100%;
+        object-fit: cover;
+
+        @include min(1700) {
+            width: 100%;
+            // transform: scale(1.5);
+
+            @include min(1700) {
+                width: 450px;
+            }
+        }
+
+    }
+    h3 {
+        position: absolute;
+        top: 34px;
+        left: 30px;
+        color: #EEECE8;
+        z-index: 9;
+        @include max(1600) {
+            font-size: size(23px);
+        }
+        @include max(1250) {
+            font-size: size(20px);
+        }
+    }
+}
+
+.project_media {
+    position: relative;
+    max-width: 390;
+
+    figure {
+        @include aspectRatio(390, 480);
+        overflow: hidden;
+
+        img {
+            border-radius: 6px;
+            overflow: hidden;
+            width: 100% !important;
+            // transition: all .3s ease-in-out;
+            object-fit: cover !important;
+        }
+
+        // &:hover {
+        //     img {
+        //         transform: scale(1.2);
+        //     }
+        // }
+    }
+
+    .video {
+        // @include aspectRatio(390, 480);
+        position: relative;
+    }
+
+    video {
+
+        position: absolute;
+        left: 0;
+        top: 0;
+        object-fit: cover !important;
+        border-radius: 6px;
+    }
+}
+
+.project_desc {
+    h5 {
+        font-size: size(18px);
+        margin: 25px 0 5px 0;
+        line-height: 1;
+        font-family: var(--primary-font);
+        @include max(767){
+            font-size: size(15px);
+        }
+    }
+
+    h3 {
+        line-height: size(40px);
+        @include max(767){
+            line-height: size(28px);
+            font-size: size(20px);
+        }
+    }
+}

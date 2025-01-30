@@ -1,9 +1,52 @@
-"use client";
-import React from "react";
+"use client"; // This makes the component a client-side component
+import React, { useEffect, useRef } from "react";
+import { useMediaQuery } from "react-responsive";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
 import TestimonialsSection from "./components/testimonials";
+import ContentSet from "./components/contentSet/ContentSet";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import styles from "../../public/styles/home.module.scss";
+import splitTextAnimation from "./components/splitTextAnimation";
+import BenchmarkCard from "./components/cards/BenchmarkCard";
+import HomeFinest from "./components/homeFinest/homeFinest";
+import FinestMob from "./components/finestMob/FineshMob";
+import ImageList from "./components/homeImageList/ImageList";
+import HomeExpertise from "./components/homeExpertise/HomeExpertise";
+
+const benchCardlist = [
+  {
+    videoSrc: "https://www.instagram.com/reel/DEWn__5Tyez/embed/",
+    imageAlt: "Dynamic Spiral Villa",
+    link: "/work/acoustic-balance",
+    title: "Dynamic Spiral Villa",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    location: "Palm Jumeirah",
+  },
+  {
+    videoSrc: "https://www.instagram.com/reel/DESbq8Pz2KK/embed/",
+    imageAlt: "The Elevated Oasis - Penthouse ",
+    link: "/work/address-downtown",
+    title: "The Elevated Oasis - Penthouse ",
+    location: "Confidential",
+  },
+  {
+    videoSrc: "https://www.instagram.com/reel/DEZFwE4T6H2/embed",
+    imageAlt: "Villa on Fond G",
+    link: "/work-detail-2",
+    title: "Villa on Fond G",
+    location: "Palm Jumeirah",
+  },
+  {
+    videoSrc: "https://www.instagram.com/reel/DEWn__5Tyez/embed/",
+    imageAlt: "The Regal Escape -  Apartment",
+    link: "/work-detail-3",
+    title: "The Regal Escape -  Apartment",
+    location: "Dubai Marina",
+  },
+];
 
 // Animations
 const fadeIn = {
@@ -21,7 +64,57 @@ const imageFadeIn = {
   visible: { opacity: 1 },
 };
 
+gsap.registerPlugin(ScrollTrigger);
 export default function PlantsSalonWebsite() {
+  const isDesktop = useMediaQuery({ minWidth: 1200 });
+  const sectionsRef = useRef([]);
+  const headerRef = useRef(null); // ref for the sticky header
+  splitTextAnimation(sectionsRef, "trigger_title");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const currentPath = window.location.pathname;
+      if (currentPath === "/") {
+        document.documentElement.classList.add("home_page");
+      } else {
+        document.documentElement.classList.remove("home_page");
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger); // Register GSAP ScrollTrigger plugin
+
+    // ScrollTrigger logic for section1
+    ScrollTrigger.create({
+      trigger: sectionsRef.current[1], // targeting the section1
+      start: "top top", // When the section reaches the top of the viewport
+      end: "bottom 310", // When the section scrolls past the top of the viewport
+      pin: headerRef.current, // Pin the header element
+      pinSpacing: false, // Optional: to disable extra space added during pinning
+      onEnter: () => {
+        // When entering the section, add 'fixed' class
+        headerRef.current.classList.add("fixed");
+      },
+      onLeave: () => {
+        // When leaving the section, remove 'fixed' class
+        headerRef.current.classList.remove("fixed");
+      },
+      onEnterBack: () => {
+        // When coming back into the section, add 'fixed' class
+        headerRef.current.classList.add("fixed");
+      },
+      onLeaveBack: () => {
+        // When leaving the section in reverse direction, remove 'fixed' class
+        headerRef.current.classList.remove("fixed");
+      },
+      onComplete: () => {
+        // When the section has been fully scrolled through, remove 'fixed' class
+        headerRef.current.classList.remove("fixed");
+      },
+    });
+  }, []);
+
   const franchises = [
     {
       image: "/valencia.webp", // Replace with actual image URL
@@ -46,7 +139,7 @@ export default function PlantsSalonWebsite() {
   ];
 
   return (
-    <div className="font-sans bg-gradient-to-b from-green-50 to-green-200 min-h-screen">
+    <div className={styles.page}>
       {/* Hero Section with Main Image */}
       <section className="h-screen flex flex-col justify-center items-start text-left p-4 relative">
         <motion.div
@@ -82,174 +175,75 @@ export default function PlantsSalonWebsite() {
         </motion.div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-16 bg-gradient-to-r from-green-100 to-blue-100 h-auto">
-        <motion.div
-          className="container mx-auto text-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeIn}
-          transition={{ duration: 1 }}
-        >
-          <h2 className="text-4xl font-bold text-green-800 mb-8">
-            Our Services
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {[
-              { name: "Hair Treatments", image: "hair.avif" },
-              { name: "Skin Care", image: "skin.jpg" },
-              { name: "Relaxing Massages", image: "massages.jpg" },
-            ].map((service, index) => (
-              <div
-                key={index}
-                className="relative bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300"
-              >
-                <img
-                  src={`/${service.image}`} // Use the image from public folder
-                  alt={service.name}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="absolute inset-0 bg-black opacity-30"></div>
-                <div className="absolute inset-0 flex items-center justify-center text-white p-4">
-                  <div className="text-center">
-                    <h3 className="text-xl font-semibold">{service.name}</h3>
-                    <p className="text-sm mt-2">
-                      {service.name === "Hair Treatments"
-                        ? "Restore the strength and shine of your hair with premium treatments."
-                        : service.name === "Skin Care"
-                        ? "Rejuvenate and nourish your skin with holistic care."
-                        : "Relax and unwind with soothing massage techniques for the body and mind."}
-                    </p>
-                  </div>
-                </div>
+      {/* second section */}
+      <div className="container">
+        <div>
+          <ContentSet
+            heading="Plants Salon –  A Touch of Nature"
+            content={
+              <>
+                A <strong>luxury salon experience</strong> designed to bring out
+                your natural beauty with expert care. At{" "}
+                <strong>Plants Salon</strong>, our philosophy revolves around
+                <strong> ‘Care, Craft, Confidence’</strong>, ensuring every
+                service enhances your look and well-being.
+                <strong> No shortcuts—just artistry and precision,</strong>{" "}
+                combining the latest techniques, premium products, and a touch
+                of elegance to create a salon experience that’s as refreshing as
+                it is transformative.
+              </>
+            }
+            imageSrc="/valencia.webp"
+            imageAlt="Modern luxury salon ambiance"
+          />
+        </div>
+      </div>
+
+      {/* third section */}
+      <div
+        className={`${styles.hoem_benchmark} ${styles.pt_100} ${styles.pb_100} bg_color`}
+        ref={(el) => (sectionsRef.current[0] = el)}
+      >
+        <div className="container">
+          <div className="top_title">
+            <h2 className="main_title trigger_title">
+              Follow us on <br />
+              Instagram!
+            </h2>
+            {/* <p>
+              Our commitment to quality and perfection has earned us a
+              distinguished reputation in the industry, encapsulated in what is
+              now known as 'The Alpago Experience.' Discover why 'Alpago' has
+              become synonymous with excellence.
+            </p> */}
+          </div>
+          <div className={styles.becnchmark_list}>
+            {benchCardlist.map((card, index) => (
+              <div className={styles.benchmark_set} key={index}>
+                <BenchmarkCard data={card} />
               </div>
             ))}
           </div>
+        </div>
+      </div>
 
-          <div className="bg-white p-8 rounded-lg shadow-lg sm:block hidden">
-            <p className="font-cursive text-green-800 text-lg leading-relaxed mt-4">
-              At the heart of every service we offer lies a commitment to
-              providing you with not just a treatment, but an experience that
-              nurtures your body and mind. Our hair treatments are designed to
-              restore the health and vitality of your hair, using
-              nature-inspired techniques that nourish and rejuvenate each
-              strand. Whether you're looking for stronger hair, a shinier
-              finish, or a more defined style, our expert therapists ensure that
-              every treatment is customized to meet your specific needs.
-            </p>
-            <p className="font-cursive text-green-800 text-lg leading-relaxed mt-4">
-              Our skin care services go beyond the typical facials, offering a
-              holistic approach that addresses both inner and outer beauty. With
-              a focus on natural ingredients and calming therapies, we create a
-              personalized experience for each client, leaving your skin feeling
-              refreshed, radiant, and youthful. Every treatment is an
-              opportunity to unwind and reconnect with your true self, restoring
-              balance and harmony to your skin and soul.
-            </p>
-            <p className="font-cursive text-green-800 text-lg leading-relaxed mt-4">
-              Finally, our relaxing massages offer the perfect escape from the
-              stresses of daily life. We use a combination of soothing
-              techniques, including deep tissue and aromatherapy, to ease
-              tension, promote relaxation, and enhance circulation. Each massage
-              session is a moment to let go of worries and immerse yourself in
-              total serenity. Whether you're seeking relief from physical
-              discomfort or simply need a mental reset, our massage treatments
-              are the perfect way to restore balance and leave you feeling
-              renewed.
-            </p>
-          </div>
-        </motion.div>
-      </section>
+      {/* fourth section */}
+      <ImageList />
 
-      {/* Franchises Section */}
-      <section className="bg-green-900 py-16 px-8 h-auto">
-        <motion.div
-          className="container mx-auto text-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeIn}
-          transition={{ duration: 1 }}
-        >
-          <div className="text-center md:text-left mb-8">
-            <h2 className="text-4xl font-light leading-tight">
-              <span className="text-green-500">Our</span>
-              <br />
-              <span className="text-black">Franchise</span>
+      {/* fifth section */}
+      <div
+        className={`${styles.pt_100} ${styles.pb_100} ${styles.home_expertise} bg_color section1`}
+        ref={(el) => (sectionsRef.current[1] = el)}
+      >
+        <div className={styles.exp_head}>
+          <div className="container">
+            <h2 className="main_title sticky-header trigger_title" ref={headerRef}>
+              Our Services
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {franchises.map((franchise, index) => (
-              <div
-                key={index}
-                className="relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-              >
-                <img
-                  src={franchise.image}
-                  alt={franchise.location}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-4 text-white">
-                  <h3 className="text-lg font-semibold">
-                    {franchise.location}
-                  </h3>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Instagram Video Section */}
-      <section className="py-16 bg-white h-screen">
-        <motion.div
-          className="container mx-auto text-center h-full"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeIn}
-          transition={{ duration: 1 }}
-        >
-          <h2 className="text-4xl font-bold text-green-800 mb-8">
-            Follow Us on Instagram
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 h-full">
-            <div className="rounded-lg overflow-hidden shadow-lg h-full pb-20">
-              <iframe
-                className="w-full h-full"
-                src="https://www.instagram.com/reel/DEWn__5Tyez/embed/"
-                frameBorder="0"
-                allowFullScreen
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                style={{ overflow: "hidden" }}
-              ></iframe>
-            </div>
-            <div className="rounded-lg overflow-hidden shadow-lg h-full pb-20 sm:block hidden">
-              <iframe
-                className="w-full h-full"
-                src="https://www.instagram.com/reel/DEZFwE4T6H2/embed/"
-                frameBorder="0"
-                allowFullScreen
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                style={{ overflow: "hidden" }}
-              ></iframe>
-            </div>
-            <div className="rounded-lg overflow-hidden shadow-lg h-full pb-20 sm:block hidden">
-              <iframe
-                className="w-full h-full"
-                src="https://www.instagram.com/reel/DESbq8Pz2KK/embed/"
-                frameBorder="0"
-                allowFullScreen
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                style={{ overflow: "hidden" }}
-              ></iframe>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      <TestimonialsSection />
+        </div>
+        <HomeExpertise />
+      </div>
 
       <section className="py-16 h-auto relative">
         <div

@@ -1,0 +1,64 @@
+@import "variable", "base", "mixins/mixins";
+
+.home_banner{
+    width: 100%;
+    height: 100vh;
+    // height: 900px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 1s ease-in-out;
+    @include max(1600) {
+        height: 800px;
+    }
+    @include max(1060) {
+        height:90vh;
+    }
+}
+:global(body.home_banner_active) .home_banner {
+    height: 900px;
+}
+.becnchmark_list{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:35px  65px;
+    padding-top: 60px;
+    @include max(1600) {
+        padding-top: 50px;
+    }
+    @include max(992) {
+        gap:25px 40px;
+    }
+    @include max(767) {
+        grid-template-columns: repeat(1,1fr);
+        padding-top: 25px;
+        gap: 40px 0;
+    }
+    .benchmark_set{
+        &:nth-child(2n+2){
+            margin-top: 75px;
+            @include max(767) {
+                margin-top:0px;
+            }
+        }
+    }
+}
+.home_expertise{
+    position: relative;
+    overflow: hidden;
+    .exp_head{
+        position: sticky;
+        top: 0;
+        // top: 50px;
+        // z-index: 10; 
+    }
+    h2{
+        text-align: center;
+        margin-bottom:60px;
+        @include max(767) {
+            margin-bottom: 15px;
+        }
+    }
+}

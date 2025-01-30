@@ -1,0 +1,69 @@
+@import "../../../../public/styles/variable";
+@import "../../../../public/styles/base";
+@import "../../../../public/styles/mixins/mixins";
+.home_expertise{
+    width: 100%;
+    .home_expert_list{
+        width: 100%;
+    }
+    .expert_set{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+         @include max(992) {
+           flex-wrap: wrap;
+        }
+        &:nth-child(2n+2) .expert_column_right{
+            display: flex;
+            column-gap: 5px;
+            
+            @include max(992) {
+                flex-wrap: wrap;
+             }
+             >div{
+                @include max(992) {
+                    width: 100%;
+                }
+             }
+        }
+        
+    }
+    .single_set {
+        padding-left: var(--card-width, 0); // Use the card width variable for padding
+        transition: padding-left 0.3s ease; // Smooth transition for resizing
+        @include max(992) {
+            padding-left: 4%;
+            width: 100%;
+         }
+        
+      }
+      .expert_column_left{
+        @include max(992) {
+            margin-left: auto;
+            margin-right: 4%;
+         }
+          
+      }
+      .expert_column_right{
+        @include max(992) {
+            width: 100%;
+         }
+         .expert_item{
+            &:first-child{
+                @include max(992) {
+                    margin-left: 4%;
+                 }
+            }
+            &:nth-child(2n+2){
+                a{
+                    @include max(992) {
+                        margin-left: auto;
+                        margin-right: 4%;
+                     }
+                }
+                
+            }
+         }
+      }
+}
+

@@ -1,0 +1,105 @@
+$base-size: 16;
+
+// Breakpoints
+$grid-breakpoints: (
+  xxs: 0,
+  xs: 600px,
+  sm: 767px,
+  md: 992px,
+  lg: 1060px,
+  xl: 1260px,
+  xxl: 1600px
+);
+
+// Container max-widths
+$container-max-widths: (
+  xs: 90%,
+  sm: 90%,
+  md: 90%,
+  lg: 1100px,
+  xl: 1230px,
+  xxl: 1330px
+);
+
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+
+  // Loop through the grid breakpoints
+  @each $breakpoint, $value in $grid-breakpoints {
+    // Get the corresponding container max-width
+    $container-width: map-get($container-max-widths, $breakpoint);
+
+    @if $container-width !=null {
+      @media (min-width: $value) {
+        max-width: $container-width;
+      }
+    }
+  }
+}
+
+// Fluid container (always 100% width)
+.container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+$h-sizes: (
+  1: (null: 40,
+    992: 45,
+    1200: 65,
+    1600: 70,
+  ),
+  2: (null: 30,
+    992: 34,
+    1200: 50,
+    1600: 50,
+  ),
+  3: (null: 25,
+    992: 25,
+    1200:28,
+    1600:30,
+  ),
+  4: (null: 20,
+    992: 20,
+    1200: 25,
+  ),
+  5: (null: 18,
+    768: 20,
+    1200: 20,
+  ),
+  6: (null: 16,
+    992: 18,
+  ),
+);
+
+@each $level, $size in $h-sizes {
+
+  h#{$level},
+  .h#{$level} {
+
+    @each $bp, $fs in $size {
+      @if ($bp ==null) {
+        font-size: size($fs);
+      }
+
+      @else {
+        @include min($bp) {
+          font-size: size($fs);
+        }
+      }
+    }
+  }
+}
+
+@function f-size($target, $context: $base-font) {
+  @return ($target / $context) * 1rem;
+}

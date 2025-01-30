@@ -1,0 +1,49 @@
+@import "../../../../public/styles/mixins/mixins";
+
+.fn_set{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    &+.fn_set{
+        margin-top: 15px;
+        @include max(767) {
+            margin-top: 35px;
+         }
+    }
+    .fn_set_img{
+        width: 40%;
+        img{
+            border-radius: 6px;
+        }
+        @include max(767) {
+            width: 100%;
+         }
+    }
+    .fn_contents{
+        width: 60%;
+        padding-left: 30px;
+        @include max(767) {
+            width: 100%;
+            padding-left: 0;
+         }
+    }
+    .main_title{
+        font-size: 1.8rem;
+        line-height: 2rem;
+        margin-bottom: 20px;
+        @include max(767) {
+            font-size: 1.5rem;
+            line-height: 1.8rem;
+            margin: 10px 0;
+         }
+    }
+    &:nth-child(2n+2) .fn_set_img{
+        order: 2;
+        @include max(767) {
+            order: initial;
+         }
+    }
+}
+.FineshMob{
+    padding: 50px 0;
+}

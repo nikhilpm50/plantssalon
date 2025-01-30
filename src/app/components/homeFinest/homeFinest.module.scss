@@ -1,0 +1,65 @@
+@import "../../../../public/styles/variable";
+@import "../../../../public/styles/base";
+@import "../../../../public/styles/mixins/mixins";
+
+
+// .stacking_card{
+//     height: 100%;
+//     width: 100%;
+// }
+
+// .finest_wraper{
+//     width: 100%;
+//     height: 100%;
+//     display: flex;
+//     gap: 50px;
+//     .image_wraper{
+//          width: 31%;
+//          height: 83vh;
+//          position: relative;
+//         .finest_big_img {
+//             // width: 30%;
+//             width: 100%;
+//             max-width: 579px;
+//             position: absolute;
+//             @include max(1600) {
+//                 max-width: 510px;
+//             }
+//             @include max(1366) {
+//                 max-width: 440px;
+//             }
+//             @include max(1250) {
+//                 max-width: 400px;
+//             }
+//             figure {
+//                 @include aspectRatio(579, 737);
+//             }
+    
+//             img {
+//                 border-top-right-radius: 6px;
+//                 border-bottom-right-radius: 6px;
+    
+    
+//             }
+//         }
+//     }
+//     .finest_contents {
+//         width: 69%;
+       
+//         background: #fff;
+//         .text{
+//             max-width: 630px;
+//         }
+//     }
+// }
+
+.contents {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .contents.active {
+    opacity: 1;
+  }
+  
